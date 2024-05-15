@@ -20,19 +20,19 @@
 
       <span class="hero-secondary-text">First seen in:</span>
       <span class="hero-first-seen">
-        {{ this.firstSeenEpisodeName }}
+        {{ firstSeenEpisodeName }}
       </span>
     </div>
   </article>
 </template>
 
-<script>
+<script lang="ts">
 import axios from "axios";
 export default {
   setup() {
     return {};
   },
-  props: { hero: Object },
+  props: { hero: { type: Object, required: true } },
   data() {
     return { firstSeenEpisodeName: null };
   },

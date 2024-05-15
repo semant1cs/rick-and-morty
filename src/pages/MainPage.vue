@@ -2,21 +2,21 @@
   <div class="slider__btns">
     <button @click="decrementPageIndex"><</button>
     <button @click="incrementPageIndex">></button>
-    <span class="pages-slider">{{ currentPageIndex }}/{{ this.pagesCount }}</span>
+    <span class="pages-slider" v-show="pagesCount > 0">{{ currentPageIndex }}/{{ pagesCount }}</span>
   </div>
 
   <select v-model="selected">
-    <option v-for="option in options">{{ option.text }}</option>
+    <option v-for="option in options">{{ option.value }}</option>
   </select>
 
   <input v-model="inputNameFilter" />
   <button @click="fetchCharactersInfo">Поиск</button>
 
-  <CardList v-if="isDataExists" :heroes="this.heroes" />
+  <CardList v-if="isDataExists" :heroes="heroes" />
   <div v-else class="error-message">Похоже, что ничего не нашли</div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from "axios";
 import { ref } from "vue";
 import CardList from "../components/CardList.vue";
@@ -30,16 +30,11 @@ export default {
   },
   data() {
     return {
-      pagesCount: null,
-      heroesCount: null,
-      heroes: null,
+      pagesCount: 0,
+      heroes: [],
       selected: "",
       isDataExists: false,
-      options: [
-        { text: "Alive", value: "alive" },
-        { text: "Dead", value: "dead" },
-        { text: "Unknown", value: "unknown" },
-      ],
+      options: [{ value: null }, { value: "alive" }, { value: "dead" }, { value: "unknown" }],
     };
   },
   methods: {
@@ -63,11 +58,12 @@ export default {
           this.isDataExists = true;
           const data = response.data;
           this.pagesCount = data.info.pages;
-          this.heroesCount = data.info.count;
           this.heroes = data.results;
         })
         .catch(() => {
           this.isDataExists = false;
+          this.pagesCount = 0;
+          this.heroes = [];
         });
     },
   },

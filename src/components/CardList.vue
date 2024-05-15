@@ -6,15 +6,14 @@
   </div>
 </template>
 
-<script>
-import { defineProps } from "vue";
+<script lang="ts">
 import CardItem from "./CardItem.vue";
 
 export default {
   setup() {
     return {};
   },
-  props: { heroes: Array[Object] },
+  props: { heroes: { type: Object, required: true } },
   components: {
     CardItem: CardItem,
   },
