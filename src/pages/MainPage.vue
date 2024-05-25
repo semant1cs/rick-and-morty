@@ -141,6 +141,7 @@ export default {
   border: 1px solid transparent;
   padding: 0;
   padding-left: 10px;
+  color: white !important;
 }
 
 .name-hero__input {
