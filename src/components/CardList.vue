@@ -49,13 +49,13 @@ export default {
   grid-row-gap: 100px;
   justify-items: stretch;
   align-items: stretch;
-  margin-top: 70px;
+  margin-top: 20px;
   margin-left: 20px;
   row-gap: 30px;
   list-style-type: none;
   padding: 0;
   overflow: auto;
-  height: 70vh;
+  height: 85vh;
 }
 
 .loading {
